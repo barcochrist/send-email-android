@@ -1,3 +1,9 @@
 <resources>
-    <string name="app_name">SendEmail</string>
+    <string name="app_name">Enviar Email</string>
+    <string name="subject">Asunto</string>
+    <string name="to">Para</string>
+    <string name="message">Mensaje</string>
+    <string name="send">Enviar</string>
+    <string name="sending_mail">Enviando Correo</string>
+    <string name="mail_sent">Correo Enviado</string>
 </resources>
