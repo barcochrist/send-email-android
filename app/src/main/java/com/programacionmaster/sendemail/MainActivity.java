@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.programacionmaster.sendemail.utils.InputValidation;
+
 import java.util.Properties;
 
 import javax.mail.Authenticator;
@@ -38,16 +40,19 @@ public class MainActivity extends AppCompatActivity {
         final String recipientEmail = getIntent().getStringExtra("recipientEmail");
         final String recipientPassword = getIntent().getStringExtra("recipientPassword");
 
-        //TODO Validate mandatory fields
         buttonSendEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                sendEmailWithGmail(
-                        recipientEmail,
-                        recipientPassword,
-                        editTextTo.getText().toString(),
-                        editTextSubject.getText().toString(),
-                        editTextMessage.getText().toString());
+                if (InputValidation.isValidEditText(editTextTo, getString(R.string.field_is_required))
+                        && InputValidation.isValidEditText(editTextSubject, getString(R.string.field_is_required))
+                        && InputValidation.isValidEditText(editTextMessage, getString(R.string.field_is_required))) {
+                    sendEmailWithGmail(
+                            recipientEmail,
+                            recipientPassword,
+                            editTextTo.getText().toString(),
+                            editTextSubject.getText().toString(),
+                            editTextMessage.getText().toString());
+                }
             }
         });
     }

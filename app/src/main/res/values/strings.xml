@@ -9,4 +9,5 @@
     <string name="email">Correo Electrónico</string>
     <string name="password">Contraseña</string>
     <string name="compose">Escribir Correo</string>
+    <string name="field_is_required">Campo es requerido</string>
 </resources>

@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.programacionmaster.sendemail.utils.InputValidation;
+
 public class CredentialActivity extends AppCompatActivity {
 
     private EditText editTextEmail, editTextPassword;
@@ -21,11 +23,13 @@ public class CredentialActivity extends AppCompatActivity {
         editTextPassword = findViewById(R.id.editTextPassword);
         buttonCompose = findViewById(R.id.buttonCompose);
 
-        //TODO Validate mandatory fields
         buttonCompose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                redirectToMainActivity();
+                if (InputValidation.isValidEditText(editTextEmail, getString(R.string.field_is_required))
+                        && InputValidation.isValidEditText(editTextPassword, getString(R.string.field_is_required))) {
+                    redirectToMainActivity();
+                }
             }
         });
     }
