@@ -6,4 +6,7 @@
     <string name="send">Enviar</string>
     <string name="sending_mail">Enviando Correo</string>
     <string name="mail_sent">Correo Enviado</string>
+    <string name="email">Correo Electrónico</string>
+    <string name="password">Contraseña</string>
+    <string name="compose">Escribir Correo</string>
 </resources>

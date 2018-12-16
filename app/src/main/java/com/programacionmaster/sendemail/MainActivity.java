@@ -35,10 +35,10 @@ public class MainActivity extends AppCompatActivity {
         editTextMessage = findViewById(R.id.editTextMessage);
         buttonSendEmail = findViewById(R.id.buttonSendEmail);
 
-        //TODO Define recipient information
-        final String recipientEmail = "";
-        final String recipientPassword = "";
+        final String recipientEmail = getIntent().getStringExtra("recipientEmail");
+        final String recipientPassword = getIntent().getStringExtra("recipientPassword");
 
+        //TODO Validate mandatory fields
         buttonSendEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
