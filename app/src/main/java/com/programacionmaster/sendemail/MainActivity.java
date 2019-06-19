@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         editTextMessage = findViewById(R.id.editTextMessage);
         buttonSendEmail = findViewById(R.id.buttonSendEmail);
 
+        //Values received from another Activity (Screen)
         final String recipientEmail = getIntent().getStringExtra("recipientEmail");
         final String recipientPassword = getIntent().getStringExtra("recipientPassword");
 
@@ -59,15 +60,9 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Send email with Gmail service.
-     *
-     * @param recipient
-     * @param recipientPassword
-     * @param to
-     * @param subject
-     * @param message
      */
-    private void sendEmailWithGmail(final String recipient, final String recipientPassword, String to,
-                                    String subject, String message) {
+    private void sendEmailWithGmail(final String recipientEmail, final String recipientPassword,
+                                    String to, String subject, String message) {
         Properties props = new Properties();
         props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.socketFactory.port", "465");
@@ -77,11 +72,11 @@ public class MainActivity extends AppCompatActivity {
 
         Session session = Session.getDefaultInstance(props, new Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(recipient, recipientPassword);
+                return new PasswordAuthentication(recipientEmail, recipientPassword);
             }
         });
 
-        SenderAsyncTask task = new SenderAsyncTask(session, recipient, to, subject, message);
+        SenderAsyncTask task = new SenderAsyncTask(session, recipientEmail, to, subject, message);
         task.execute();
     }
 
@@ -112,12 +107,12 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(String... params) {
             try {
-                Message message = new MimeMessage(session);
-                message.setFrom(new InternetAddress(from));
-                message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
-                message.setSubject(subject);
-                message.setContent(message, "text/html; charset=utf-8");
-                Transport.send(message);
+                Message mimeMessage = new MimeMessage(session);
+                mimeMessage.setFrom(new InternetAddress(from));
+                mimeMessage.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
+                mimeMessage.setSubject(subject);
+                mimeMessage.setContent(message, "text/html; charset=utf-8");
+                Transport.send(mimeMessage);
             } catch (MessagingException e) {
                 e.printStackTrace();
                 return e.getMessage();
@@ -137,9 +132,6 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
             progressDialog.dismiss();
-            editTextTo.setText("");
-            editTextSubject.setText("");
-            editTextMessage.setText("");
             Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG).show();
         }
     }
