@@ -10,4 +10,6 @@
     <string name="password">Contraseña</string>
     <string name="compose">Escribir Correo</string>
     <string name="field_is_required">Campo es requerido</string>
+    <string name="warning_message">Se debe utilizar una cuenta de Google y esta debe tener Activado el acceso desde Apps menos seguras</string>
+    <string name="sender_data_title">Datos del remitente</string>
 </resources>
